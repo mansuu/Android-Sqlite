@@ -27,6 +27,11 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
        super(context,DATABASE_NAME,null,1);
     }
 
+    /**
+     * called when constructor of this class is called
+     * @param sqLiteDatabase
+     *
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
                 sqLiteDatabase.execSQL("create table\t"+TABLE_NAME+"\n"+"("+
@@ -35,6 +40,11 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_THREE+"\t"+"varchar(20));");
     }
 
+    /**
+     *
+     * @param customer
+     * receives an object of Customer class and inserts it's record in database
+     */
     public void insertRecord(Customer customer){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues cv=new ContentValues();
@@ -45,6 +55,11 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     *
+     * @return
+     * All existing records
+     */
     public List<Customer> getRecords(){
         List<Customer> customers=null;
         SQLiteDatabase db=getReadableDatabase();
@@ -66,6 +81,13 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
         return customers;
     }
 
+    /**
+     *
+     * @param sqLiteDatabase
+     * @param i
+     * @param i1
+     * upgrade your database with new version
+     */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
