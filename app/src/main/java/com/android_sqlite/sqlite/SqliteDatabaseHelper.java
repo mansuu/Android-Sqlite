@@ -92,4 +92,42 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    /**
+     *
+     * @param customerId takes customerID as primary key to delete a row
+     * @return true/false return true if deleted and false if deletion failed
+     *
+     */
+    public boolean delete(String customerId){
+        boolean status=false;
+        SQLiteDatabase db=getWritableDatabase();
+        if(db!=null){
+
+            status=db.delete(TABLE_NAME,COLUMN_ONE+"\t="+customerId,null)>0;
+        }
+        return status;
+    }
+
+    /**
+     *
+     * @param customerId
+     * @param customerName
+     * @param customerNumber
+     * @return true/false if updated with new values where COLUMN_NAME=given customerID
+     */
+    public boolean update(String customerId,String customerName,String customerNumber){
+        boolean status=false;
+        String updateQuery="Update table\t"+TABLE_NAME+"\t set\t"+COLUMN_TWO+"\t="+customerName+"\t,"+
+                            COLUMN_THREE+"\t="+customerNumber+"\t where\t"+COLUMN_ONE+"="+customerId;
+        SQLiteDatabase db=getWritableDatabase();
+        if(db!=null){
+            ContentValues cv=new ContentValues();
+            cv.put(COLUMN_TWO,customerName);
+            cv.put(COLUMN_THREE,customerNumber);
+           status=db.update(TABLE_NAME,cv,COLUMN_ONE+"\t="+customerId,null)>0 ;
+        }
+        return status;
+    }
+
 }
