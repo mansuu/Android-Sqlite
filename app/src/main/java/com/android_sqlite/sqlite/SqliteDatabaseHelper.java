@@ -118,8 +118,6 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
      */
     public boolean update(String customerId,String customerName,String customerNumber){
         boolean status=false;
-        String updateQuery="Update table\t"+TABLE_NAME+"\t set\t"+COLUMN_TWO+"\t="+customerName+"\t,"+
-                            COLUMN_THREE+"\t="+customerNumber+"\t where\t"+COLUMN_ONE+"="+customerId;
         SQLiteDatabase db=getWritableDatabase();
         if(db!=null){
             ContentValues cv=new ContentValues();
